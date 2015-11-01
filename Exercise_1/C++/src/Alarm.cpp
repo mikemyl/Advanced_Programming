@@ -1,9 +1,11 @@
 #include "Alarm.h"
 #include <string>
+#include <iostream>
 
 void Alarm::attach(AlarmObserver *observer)
 {
     observer_list.push_back(observer);      
+    std::cout << "Observer " << observer->getName() << " attached.\n";
 }
 
 void Alarm::detach(AlarmObserver *observer)
@@ -22,21 +24,23 @@ void Alarm::notify()
 {
     for (unsigned i = 0; i < observer_list.size(); i++)
     {
-        observer_list[i]->update(); 
+        observer_list[i]->update(this); 
     }
 }
 
-const std::string& Alarm::getState()
+State Alarm::getState()
 {
     return state;
 }
 
-void Alarm::setState(const std::string& newState)
+void Alarm::setState(State newState)
 {
+    std::cout << "State changed from " << state << " to " << newState << ".\n";
     state = newState;
+    notify();
 }
 
 Alarm::Alarm()
 {
-    state = "Waiting";
+    state = Disarmed;
 }

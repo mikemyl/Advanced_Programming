@@ -1,15 +1,23 @@
 #include "AlarmObserver.h"
 
-AlarmObserver::AlarmObserver(Alarm *alarm, const std::string& name)
+AlarmObserver::AlarmObserver(const std::string& name)
 {
     this->name = name;
-    this->alarm = alarm;
-    this->alarmState = alarm->getState();
 }
 
-void AlarmObserver::update()
+AlarmObserver::~AlarmObserver()
 {
-    const std::string& newState = alarm->getState();
-    std::cout << "Alarm State Changed: " << alarmState << " -> " << newState;
+    
+}
+
+void AlarmObserver::update(Alarm *alarm)
+{
+    State newState = alarm->getState();
+    std::cout << "Alarm State Changed: " << newState << ".\n";
     this->alarmState = newState;
+}
+
+const std::string& AlarmObserver::getName()
+{
+    return this->name;
 }

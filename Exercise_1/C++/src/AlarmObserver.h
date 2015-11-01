@@ -14,8 +14,10 @@ class AlarmObserver
     std::string alarmState;
 
 public:
-    virtual void update();
-    AlarmObserver(Alarm*, const std::string&);
+    void update(Alarm*);
+    const std::string& getName();
+    AlarmObserver(const std::string&);
+    ~AlarmObserver();
 };
 
 #endif

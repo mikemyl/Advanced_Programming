@@ -6,20 +6,26 @@
 #include <string>
 #include "AlarmObserver.h"
 
+enum State {
+    Disarmed, Armed, Triggered
+};
+
 class AlarmObserver;
 
 class Alarm
 {
-    std::vector<AlarmObserver*> observer_list;
-    std::string state;
+    public:
+        Alarm();
+        void attach(AlarmObserver*);
+        void detach(AlarmObserver*);
+        void notify(); 
+        State getState();
+        void setState(State);
 
-public:
-    Alarm();
-    void attach(AlarmObserver*);
-    void detach(AlarmObserver*);
-    void notify(); 
-    const std::string& getState();
-    void setState(const std::string&);
+    private:
+        std::vector<AlarmObserver*> observer_list;
+        State state;
+
 };
 
 #endif
