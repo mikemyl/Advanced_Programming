@@ -1,5 +1,7 @@
 #include "Alarm.hpp"
-#include "AlarmObserver.hpp"
+#include "Siren.hpp"
+#include "Mailer.hpp"
+#include "Keypad.hpp"
 #include <iostream>
 
 /************************************************************************
@@ -12,9 +14,9 @@
 int main() {
     Alarm alarm;
 
-    AlarmObserver keypad("Keypad");
-    AlarmObserver siren("Siren");
-    AlarmObserver mailer("Mailer");
+    Keypad keypad("Keypad_1");
+    Siren siren("Siren_42");
+    Mailer mailer("Foo_Mailer");
     
     alarm.subscribe(&keypad);
     alarm.subscribe(&siren);
