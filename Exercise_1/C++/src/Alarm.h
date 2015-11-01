@@ -5,10 +5,7 @@
 #include <list>
 #include <string>
 #include "AlarmObserver.h"
-
-enum State {
-    Disarmed, Armed, Triggered
-};
+#include "AlarmState.h"
 
 class AlarmObserver;
 
@@ -19,12 +16,12 @@ class Alarm
         void attach(AlarmObserver*);
         void detach(AlarmObserver*);
         void notify(); 
-        State getState();
-        void setState(State);
+        AlarmState getState();
+        void setState(AlarmState);
 
     private:
         std::vector<AlarmObserver*> observer_list;
-        State state;
+        AlarmState state;
 
 };
 

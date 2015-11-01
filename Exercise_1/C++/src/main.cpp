@@ -10,9 +10,8 @@ int main() {
     alarm.attach(&keypad);
     alarm.attach(&siren);
     alarm.attach(&mailer);
-    alarm.setState(Armed);
-    alarm.setState(Triggered);
-
+    alarm.setState(DISARMED);
+    alarm.setState(TRIGGERED);
 
     return 0;
 }

@@ -28,12 +28,12 @@ void Alarm::notify()
     }
 }
 
-State Alarm::getState()
+AlarmState Alarm::getState()
 {
     return state;
 }
 
-void Alarm::setState(State newState)
+void Alarm::setState(AlarmState newState)
 {
     std::cout << "State changed from " << state << " to " << newState << ".\n";
     state = newState;
@@ -42,5 +42,5 @@ void Alarm::setState(State newState)
 
 Alarm::Alarm()
 {
-    state = Disarmed;
+    state = DISARMED;
 }

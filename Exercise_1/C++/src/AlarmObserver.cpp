@@ -12,8 +12,8 @@ AlarmObserver::~AlarmObserver()
 
 void AlarmObserver::update(Alarm *alarm)
 {
-    State newState = alarm->getState();
-    std::cout << "Alarm State Changed: " << newState << ".\n";
+    AlarmState newState = alarm->getState();
+    std::cout << "Alarm State Changed: " << stateDescription[newState] << ".\n";
     this->alarmState = newState;
 }
 
