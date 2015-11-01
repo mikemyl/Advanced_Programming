@@ -1,12 +1,12 @@
 all: main
 
 clean:
-	rm *.o
+	rm *.o main
 
-Alarm.o: Alarm.cpp Alarm.h AlarmObserver.h
+Alarm.o: Alarm.cpp Alarm.hpp AlarmObserver.hpp
 	g++ -Wall -c Alarm.cpp
 
-AlarmObserver.o: AlarmObserver.cpp AlarmObserver.h
+AlarmObserver.o: AlarmObserver.cpp AlarmObserver.hpp
 	g++ -Wall -c AlarmObserver.cpp
 
 main: main.o Alarm.o AlarmObserver.o

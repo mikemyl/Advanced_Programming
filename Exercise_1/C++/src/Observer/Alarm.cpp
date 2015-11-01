@@ -1,14 +1,20 @@
-#include "Alarm.h"
+#include "Alarm.hpp"
 #include <string>
 #include <iostream>
 
-void Alarm::attach(AlarmObserver *observer)
+
+Alarm::Alarm()
+{
+    state = alarm::DISARMED;
+}
+
+void Alarm::subscribe(AlarmObserver *observer)
 {
     observer_list.push_back(observer);      
     std::cout << "Observer " << observer->getName() << " attached.\n";
 }
 
-void Alarm::detach(AlarmObserver *observer)
+void Alarm::unsubscribe(AlarmObserver *observer)
 {
     for (unsigned i = 0; i < observer_list.size(); i++)
     {
@@ -20,7 +26,7 @@ void Alarm::detach(AlarmObserver *observer)
     }
 }
 
-void Alarm::notify()
+void Alarm::publish()
 {
     for (unsigned i = 0; i < observer_list.size(); i++)
     {
@@ -28,19 +34,14 @@ void Alarm::notify()
     }
 }
 
-AlarmState Alarm::getState()
+alarm::StateType Alarm::getState()
 {
     return state;
 }
 
-void Alarm::setState(AlarmState newState)
+void Alarm::setState(alarm::StateType newState)
 {
-    std::cout << "State changed from " << state << " to " << newState << ".\n";
+    std::cout << "\n\nAlarm Control Panel: State changed from " << alarm::printState(state) << " to " << alarm::printState(newState) << ".\n\n";
     state = newState;
-    notify();
-}
-
-Alarm::Alarm()
-{
-    state = DISARMED;
+    publish();
 }

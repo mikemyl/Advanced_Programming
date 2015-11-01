@@ -1,4 +1,4 @@
-#include "AlarmObserver.h"
+#include "AlarmObserver.hpp"
 
 AlarmObserver::AlarmObserver(const std::string& name)
 {
@@ -12,8 +12,8 @@ AlarmObserver::~AlarmObserver()
 
 void AlarmObserver::update(Alarm *alarm)
 {
-    AlarmState newState = alarm->getState();
-    std::cout << "Alarm State Changed: " << stateDescription[newState] << ".\n";
+    alarm::StateType newState = alarm->getState();
+    std::cout << this->name << ": Alarm State Changed: " << alarm::printState(newState) << ".\n";
     this->alarmState = newState;
 }
 
