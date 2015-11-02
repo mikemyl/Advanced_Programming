@@ -1,25 +1,25 @@
 #include "Siren.hpp"
 #include "Publisher.hpp"
 #include <iostream>
+#include <iomanip>
 
-Siren::Siren(const std::string& name)
+Siren::Siren(Alarm *alarm)
 {
-    this->name = name;
+    this->alarmControlPanel = alarm;
+    alarm->subscribe(this);
 }
 
-Siren::~Siren()
+Siren::~Siren() {}
+
+void Siren::update(Publisher *publisher)
 {
-    
+    if (publisher == alarmControlPanel)
+        beep();
 }
 
-void Siren::update(alarm::StateType newState)
-
+void Siren::beep()
 {
-    std::cout << "-Siren (" <<  this->name << ") ** Beep Beep ** : Alarm State Changed: " << alarm::printState(newState) << ".\n";
+    alarm::StateType newState = alarmControlPanel->getState();
+    std::cout <<  std::setw(25) <<  "-Siren:" << std::left  << "** Beep Beep ** : Alarm State Changed: " << alarm::printState(newState) << std::endl;
     this->alarmState = newState;
-}
-
-const std::string& Siren::getName()
-{
-    return this->name;
 }

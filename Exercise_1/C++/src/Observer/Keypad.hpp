@@ -2,21 +2,23 @@
 #define KEYPAD_HPP
 
 #include "AlarmHelper.hpp"
+#include "Alarm.hpp"
 #include "Publisher.hpp"
-#include <string>
 
 class Publisher;
 
 class Keypad : public AbstractSubscriber
 {
-    std::string name;
-    alarm::StateType alarmState;
 
     public:
-        Keypad(const std::string&);
-        ~Keypad();
-        void update(alarm::StateType);
-        const std::string& getName();
+        Keypad(Alarm*);
+        virtual ~Keypad();
+        virtual void update(Publisher*);
+        virtual void indicate();
+
+    private:
+        alarm::StateType alarmState;
+        Alarm* alarmControlPanel;
 };
 
 #endif /* KEYPAD_HPP */

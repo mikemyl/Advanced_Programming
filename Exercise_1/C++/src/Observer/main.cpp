@@ -14,13 +14,10 @@
 int main() {
     Alarm alarm;
 
-    Keypad keypad("Keypad_1");
-    Siren siren("Siren_42");
-    Mailer mailer("Foo_Mailer");
+    Keypad keypad(&alarm);
+    Siren siren(&alarm);
+    Mailer mailer(&alarm);
     
-    alarm.subscribe(&keypad);
-    alarm.subscribe(&siren);
-    alarm.subscribe(&mailer);
     
     alarm.setState(alarm::ARMED);
     alarm.setState(alarm::TRIGGERED);

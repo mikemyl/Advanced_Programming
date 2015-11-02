@@ -2,21 +2,23 @@
 #define SIREN_HPP
 
 #include "AlarmHelper.hpp"
+#include "Alarm.hpp"
 #include "Publisher.hpp"
-#include <string>
 
 class Publisher;
 
 class Siren : public AbstractSubscriber
 {
-    std::string name;
-    alarm::StateType alarmState;
 
     public:
-        Siren(const std::string&);
-        ~Siren();
-        void update(alarm::StateType);
-        const std::string& getName();
+        Siren(Alarm*);
+        virtual ~Siren();
+        virtual void update(Publisher*);
+        virtual void beep();
+
+    private:
+        Alarm* alarmControlPanel;
+        alarm::StateType alarmState;
 };
 
 #endif /* SIREN_HPP */

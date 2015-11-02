@@ -1,24 +1,25 @@
 #include "Mailer.hpp"
 #include "Publisher.hpp"
 #include <iostream>
+#include <iomanip>
 
-Mailer::Mailer(const std::string& name)
+Mailer::Mailer(Alarm *alarm)
 {
-    this->name = name;
+    this->alarmControlPanel = alarm;
+    alarm->subscribe(this);
 }
 
-Mailer::~Mailer()
+Mailer::~Mailer() {}
+
+void Mailer::update(Publisher *publisher)
 {
-    
+    if (alarmControlPanel == publisher)
+        sendMail();
 }
 
-void Mailer::update(alarm::StateType newState)
+void Mailer::sendMail()
 {
-    std::cout << "-Mailer (" << this->name << ") ** New Mail!**  : Alarm State Changed: " << alarm::printState(newState) << ".\n";
+    alarm::StateType newState = alarmControlPanel->getState();
+    std::cout <<  std::setw(25) << "-Mailer:" <<  std::left << "** New Mail!**  : Alarm State Changed: " << alarm::printState(newState) << std::endl;
     this->alarmState = newState;
-}
-
-const std::string& Mailer::getName()
-{
-    return this->name;
 }

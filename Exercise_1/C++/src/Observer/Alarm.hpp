@@ -22,7 +22,8 @@ class Alarm : public Publisher
 {
     public:
         Alarm();
-        void setState(alarm::StateType);
+        virtual void setState(alarm::StateType);
+        virtual alarm::StateType getState();
 };
 
 #endif

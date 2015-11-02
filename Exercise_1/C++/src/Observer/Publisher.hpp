@@ -7,10 +7,14 @@
 
 class Publisher {
     public:
-        void subscribe(AbstractSubscriber*);
-        void unsubscribe(AbstractSubscriber*);
-        void publish(); 
+        virtual void subscribe(AbstractSubscriber*);
+        virtual void unsubscribe(AbstractSubscriber*);
+        virtual void publish(); 
+        virtual ~Publisher();
+
+    protected:
         alarm::StateType state;
+        Publisher();
 
     private:
         std::vector<AbstractSubscriber*> subscriber_list;

@@ -3,6 +3,9 @@
 #include "AbstractSubscriber.hpp"
 #include <iostream>
 
+Publisher::Publisher() {}
+
+Publisher::~Publisher() {}
 
 void Publisher::subscribe(AbstractSubscriber *subscriber)
 {
@@ -25,7 +28,7 @@ void Publisher::publish()
 {
     for (unsigned i = 0; i < subscriber_list.size(); i++)
     {
-        subscriber_list[i]->update(state); 
+        subscriber_list[i]->update(this); 
     }
 }
 

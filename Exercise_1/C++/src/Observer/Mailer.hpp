@@ -3,20 +3,23 @@
 
 #include "AlarmHelper.hpp"
 #include "Publisher.hpp"
+#include "Alarm.hpp"
 #include <string>
 
 class Publisher;
 
 class Mailer : public AbstractSubscriber
 {
-    std::string name;
-    alarm::StateType alarmState;
-
     public:
-        Mailer(const std::string&);
-        ~Mailer();
-        void update(alarm::StateType);
-        const std::string& getName();
+        Mailer(Alarm*);
+        virtual ~Mailer();
+        virtual void update(Publisher*);
+        virtual void sendMail();
+
+    private:
+        alarm::StateType alarmState;
+        Alarm *alarmControlPanel;
+
 };
 
 #endif /* MAILER_HPP */

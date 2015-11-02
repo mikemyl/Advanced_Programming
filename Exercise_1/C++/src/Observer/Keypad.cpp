@@ -1,24 +1,25 @@
 #include "Keypad.hpp"
 #include "Publisher.hpp"
 #include <iostream>
+#include <iomanip>
 
-Keypad::Keypad(const std::string& name)
+Keypad::Keypad(Alarm *alarm)
 {
-    this->name = name;
+    this->alarmControlPanel = alarm;
+    alarm->subscribe(this);
 }
 
-Keypad::~Keypad()
+Keypad::~Keypad() {}
+
+void Keypad::update(Publisher *publisher)
 {
-    
+    if (alarmControlPanel == publisher)
+        indicate();        
 }
 
-void Keypad::update(alarm::StateType newState)
+void Keypad::indicate()
 {
-    std::cout << "-Keypad Indicator (" << this->name << ")  ** State change Indication! ** : Alarm State Changed: " << alarm::printState(newState) << ".\n";
+    alarm::StateType newState = alarmControlPanel->getState();
+    std::cout << std::setw(25) << "-Keypad Indicator:"  << std::left << "** State change Indication! ** : Alarm State Changed: " << alarm::printState(newState) << std::endl;
     this->alarmState = newState;
-}
-
-const std::string& Keypad::getName()
-{
-    return this->name;
 }
