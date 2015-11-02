@@ -9,7 +9,10 @@ Keypad::Keypad(Alarm *alarm)
     alarm->subscribe(this);
 }
 
-Keypad::~Keypad() {}
+Keypad::~Keypad() 
+{
+    alarmControlPanel->unsubscribe(this);
+}
 
 void Keypad::update(Publisher *publisher)
 {

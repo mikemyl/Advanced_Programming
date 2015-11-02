@@ -9,7 +9,10 @@ Siren::Siren(Alarm *alarm)
     alarm->subscribe(this);
 }
 
-Siren::~Siren() {}
+Siren::~Siren() 
+{
+    alarmControlPanel->unsubscribe(this);
+}
 
 void Siren::update(Publisher *publisher)
 {

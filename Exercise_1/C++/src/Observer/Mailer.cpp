@@ -9,7 +9,10 @@ Mailer::Mailer(Alarm *alarm)
     alarm->subscribe(this);
 }
 
-Mailer::~Mailer() {}
+Mailer::~Mailer() 
+{
+    alarmControlPanel->unsubscribe(this);
+}
 
 void Mailer::update(Publisher *publisher)
 {
