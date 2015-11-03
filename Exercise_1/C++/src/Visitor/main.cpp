@@ -27,11 +27,9 @@ int main()
     operatingSystems.push_back(&xubuntu);
     operatingSystems.push_back(&mac);
 
-
     Scheduler simpleScheduler;
     ThreadedScheduler threadedScheduler;
     RandomScheduler randomScheduler;
-
 
     schedulers.push_back(&simpleScheduler);
     schedulers.push_back(&threadedScheduler);
@@ -54,7 +52,7 @@ int main()
 
     std::cout << "Single Dispatch: Although we call schedule() on each OS using different schedulers," << std::endl;
     std::cout << "their dynamic Type is not used in order to determine which schedule() will be called," << std::endl;
-    std::cout << "so the schedule(Scheduler*) will be called" << std::endl;
+    std::cout << "so the  simple schedule(Scheduler*) will be called" << std::endl;
 
     std::cout << std::endl;
 
@@ -66,6 +64,7 @@ int main()
     std::cout << std::endl << std::endl;
 
     std::cout << "Using Visitor Design Pattern, (among other things) we can 'emulate' double dispatch:" << std::endl;
+    std::cout << "We now see that The dynamic type of scheduler is actually used" << std::endl;
     std::cout << std::endl;
 
     for(unsigned i = 0; i < operatingSystems.size(); i++) {
