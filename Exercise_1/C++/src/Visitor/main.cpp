@@ -63,8 +63,9 @@ int main()
 
     std::cout << std::endl << std::endl;
 
-    std::cout << "Using Visitor Design Pattern, (among other things) we can 'emulate' double dispatch:" << std::endl;
-    std::cout << "We now see that The dynamic type of scheduler is actually used" << std::endl;
+    std::cout << "Using Visitor Design Pattern, we can easily add new functionality easilly" << std::endl;
+    std::cout << "We can also 'emulate' double dispatch!" << std::endl;
+    std::cout << "We now see that The dynamic type of scheduler is actually used:" << std::endl;
     std::cout << std::endl;
 
     for(unsigned i = 0; i < operatingSystems.size(); i++) {

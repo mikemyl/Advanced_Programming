@@ -5,7 +5,15 @@
 
 Publisher::Publisher() {}
 
-Publisher::~Publisher() {}
+Publisher::~Publisher() 
+{
+    for (unsigned i = 0; i < subscriber_list.size(); i++)
+    {
+        subscriber_list.erase(subscriber_list.begin() + i);
+        return;
+    }
+}
+
 
 void Publisher::subscribe(AbstractSubscriber *subscriber)
 {

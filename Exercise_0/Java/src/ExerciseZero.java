@@ -41,7 +41,5 @@ public class ExerciseZero {
                 continue;
             System.out.println(s + "[" + map.get(number).get(value) + " of " + map.get(number).size() + "]" );
         }
-
     }
-
 }
