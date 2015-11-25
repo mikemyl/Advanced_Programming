@@ -71,7 +71,8 @@ public class Stack {
      * @return item The first number of the stack
      */
     public int pop() {
-        if (isEmpty()) throw new NoSuchElementException("");
+        if (isEmpty())
+            throw new NoSuchElementException("");
         int item = first.number;        
         first = first.next;            
         size--;

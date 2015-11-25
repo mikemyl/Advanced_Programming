@@ -15,11 +15,7 @@ public class RWLock {
                 continue;
             }
         readers++;
-        System.out.println("Lock:  " + this + " Entering Read... Readers : " + readers);
-        try {
-            Thread.currentThread().sleep(2000);
-        } catch (InterruptedException e) {
-        }
+        //System.out.println("Lock:  " + this + " Entering Read... Readers : " + readers);
     }
 
     public synchronized void enterWrite() {
@@ -31,12 +27,7 @@ public class RWLock {
                 continue;
             }
         readers = -1;
-
-        System.out.println("Lock:  " + this + " Entering Write....  Readers (should be -1) : " + readers);
-        try {
-            Thread.currentThread().sleep(2000);
-        } catch (InterruptedException e) {
-        }
+        //System.out.println("Lock:  " + this + " Entering Write....  Readers (should be -1) : " + readers);
     }
 
     public synchronized void exitRead() {
