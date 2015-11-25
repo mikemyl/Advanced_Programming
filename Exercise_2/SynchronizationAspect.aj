@@ -1,60 +1,40 @@
+
 public aspect SynchronizationAspect {
 
-    private int readers;
+    private RWLock Stack.rwlock;
+    
+    pointcut construct(Stack stack):
+        initialization(Stack.new(..)) &&
+        target(stack);
 
-    pointcut read():
-        call (int Stack.top());
+    pointcut read(Stack stack):
+        call (int Stack.top()) &&
+        target(stack);
 
-    pointcut write():
-        call (void Stack.push(int)) ||
-        call (int Stack.pop());
+    pointcut write(Stack stack):
+        (call (void Stack.push(int)) ||
+        call (int Stack.pop())) &&
+        target(stack);
+    
+    after(Stack stack) : construct(stack) {
+        stack.rwlock = new RWLock();
+    }
+        
 
-    before() : read() {
-        enterRead();
+    before(Stack stack) : read(stack) {
+        stack.rwlock.enterRead();
     }
 
-    before() : write() {
-        enterWrite();
+    before(Stack stack) : write(stack) {
+        stack.rwlock.enterWrite();
     }
 
-    after() returning: read() {
-        exitRead();
-
+    after(Stack stack) returning: read(stack) {
+        stack.rwlock.exitRead();
     }
 
-    after() returning: write() {
-        exitWrite();
+    after(Stack stack) returning: write(stack) {
+        stack.rwlock.exitWrite();
     }
 
-    private synchronized void enterRead() {
-        while (readers == -1)
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                continue;
-            }
-        readers++;
-    }
-
-    private synchronized void enterWrite() {
-        while (readers != 0)
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                continue;
-            }
-        readers = -1;
-    }
-    private synchronized void exitRead() {
-        readers--;
-        if (readers == 0)
-            notify();
-    }
-
-    private synchronized void exitWrite() {
-        readers = 0;
-        notifyAll();
-    }
 }
