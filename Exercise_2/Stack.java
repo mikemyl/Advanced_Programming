@@ -20,7 +20,7 @@ public class Stack {
     }
 
     /**
-     * Default Contructor
+     * Default Constructor
      * Constructs an initially empty stack
      */
     public Stack() {
